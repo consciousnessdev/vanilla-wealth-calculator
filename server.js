@@ -1,22 +1,14 @@
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
+const express = require("express");
+const path = require("path");
+const app = express();
+const port = 4923;
 
-// Create a basic HTTP server
-const server = http.createServer((req, res) => {
-  fs.readFile(path.join(__dirname, 'index.html'), (err, data) => {
-    if (err) {
-      res.writeHead(500, { 'Content-Type': 'text/plain' });
-      res.end('Internal Server Error');
-      return;
-    }
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(data);
-  });
+app.use(express.static("public"));
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Start the server on port 4923
-const PORT = 4923;
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
+app.listen(port, () => {
+  console.log("Running on port " + port);
 });
