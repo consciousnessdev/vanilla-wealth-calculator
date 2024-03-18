@@ -7,7 +7,28 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div id="app">Home</div>
+    <div id="app">
+      <div class="container">
+        <header>
+          <h1 class="text--center">Wealth Calculator</h4>
+        </header>
+        <div class="calculation-wrapper flex gap-4">
+          <aside class="flex flex-column gap-4">
+            <button class="button px-4 py-4">Add Human</button>
+            <button class="button px-4 py-4">Double Money</button>
+            <button class="button px-4 py-4">Show only Millionaire</button>
+            <button class="button px-4 py-4">Sort By Richest</button>
+            <button class="button px-4 py-4">Calculate Entire Wealths</button>
+          </aside>
+          <section class="border-left flex-1 px-4 py-0">
+            <div class="header-calculation">
+              <div class="header-item">Person</div>
+              <div class="header-item">Wealth</div>
+            </div> 
+          </section>
+        </div>
+      </div>
+    </div>
     <script src="./script.js"></script>
   </body>
 </html>
