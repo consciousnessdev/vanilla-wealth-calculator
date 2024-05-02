@@ -10,11 +10,13 @@
     <div id="app">
       <div class="container">
         <header>
-          <h1 class="text--center">Wealth Calculator</h4>
+          <h1 class="text--center">Wealth Calculator</h1>
         </header>
         <div class="calculation-wrapper flex gap-4">
           <aside class="flex flex-column gap-4">
-            <button class="button px-4 py-4">Add Human</button>
+            <button class="button px-4 py-4" onclick="addHumanHandler()">
+              Add Human
+            </button>
             <button class="button px-4 py-4">Double Money</button>
             <button class="button px-4 py-4">Show only Millionaire</button>
             <button class="button px-4 py-4">Sort By Richest</button>
@@ -24,11 +26,55 @@
             <div class="header-calculation">
               <div class="header-item">Person</div>
               <div class="header-item">Wealth</div>
-            </div> 
+            </div>
+            <div class="list-usermoney"></div>
           </section>
         </div>
       </div>
     </div>
     <script src="./script.js"></script>
+    <script>
+      const wealthyClass = new Wealthy();
+      let listUserMoneyContainer =
+        document.getElementsByClassName("list-usermoney")[0];
+      listUserMoneyContainer.display = "flex";
+      listUserMoneyContainer.flexDirection = "column";
+
+      // re-render list
+      function renderList() {
+        const list = wealthyClass.showWealthyPeople();
+        // const itemUserMoney = document.createElement("div");
+        // itemUserMoney.className = "item-usermoney";
+        // itemUserMoney.style.display = "flex";
+        // itemUserMoney.style.justifyContent = "space-between";
+
+        listUserMoneyContainer.innerHTML = "";
+        console.log("DEBUG-list", list);
+        for (let index = 0; index < list.length; index++) {
+          const itemUserMoney = document.createElement("div");
+          itemUserMoney.className = "item-usermoney";
+          itemUserMoney.style.display = "flex";
+          itemUserMoney.style.justifyContent = "space-between";
+
+          const nameContainer = document.createElement("div");
+          const moneyContainer = document.createElement("div");
+          nameContainer.textContent = list[index].name;
+          moneyContainer.textContent = wealthyClass.formatMoney(
+            list[index].money
+          );
+
+          itemUserMoney.append(nameContainer);
+          itemUserMoney.append(moneyContainer);
+
+          listUserMoneyContainer.appendChild(itemUserMoney);
+        }
+      }
+
+      // add human handler
+      async function addHumanHandler() {
+        await wealthyClass.addPeople();
+        renderList();
+      }
+    </script>
   </body>
 </html>
