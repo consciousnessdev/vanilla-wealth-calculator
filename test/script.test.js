@@ -33,4 +33,21 @@ describe("Wealth Class", () => {
     const wealthyData = wealthyClass.showWealthyPeople();
     expect(wealthyData).toHaveLength(2);
   });
+
+  test("should doubled each money user", async () => {
+    await wealthyClass.addPeople();
+    await wealthyClass.addPeople();
+    const previousMoney = Array.from(wealthyClass.showWealthyPeople()).map(
+      (item) => item.money
+    );
+    wealthyClass.doubledMoney();
+    const nextMoney = [...wealthyClass.showWealthyPeople()].map(
+      (item) => item.money
+    );
+    let checkDoubledVal = [false, false];
+    for (let index = 0; index < previousMoney.length; index++) {
+      checkDoubledVal[index] = nextMoney[index] === previousMoney[index] * 2;
+    }
+    expect(checkDoubledVal.every((item) => item === true)).toBe(true);
+  });
 });
