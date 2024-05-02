@@ -17,7 +17,9 @@
             <button class="button px-4 py-4" onclick="addHumanHandler()">
               Add Human
             </button>
-            <button class="button px-4 py-4">Double Money</button>
+            <button class="button px-4 py-4" onclick="doubledMoneyHandler()">
+              Double Money
+            </button>
             <button class="button px-4 py-4">Show only Millionaire</button>
             <button class="button px-4 py-4">Sort By Richest</button>
             <button class="button px-4 py-4">Calculate Entire Wealths</button>
@@ -73,6 +75,11 @@
       // add human handler
       async function addHumanHandler() {
         await wealthyClass.addPeople();
+        renderList();
+      }
+
+      function doubledMoneyHandler() {
+        wealthyClass.doubledMoney();
         renderList();
       }
     </script>

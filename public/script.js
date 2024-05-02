@@ -33,6 +33,15 @@ class Wealthy {
     }
   }
 
+  doubledMoney() {
+    const doubledValue = [...this.listPeople].map((item) => ({
+      ...item,
+      money: item.money * 2,
+    }));
+
+    this.listPeople = [...doubledValue];
+  }
+
   showWealthyPeople() {
     return this.listPeople;
   }
