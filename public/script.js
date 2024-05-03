@@ -15,6 +15,17 @@ class Wealthy {
     return formmater.format(value);
   }
 
+  compare(a, b) {
+    if (a.money < b.money) {
+      return 1;
+    }
+
+    if (a.money > b.money) {
+      return -1;
+    }
+    return 0;
+  }
+
   async addPeople() {
     try {
       const { results } = await fetch("https://randomuser.me/api").then((res) =>
@@ -52,6 +63,13 @@ class Wealthy {
       totalWealthy = totalWealthy + this.listPeople[index].money;
     }
     return totalWealthy;
+  }
+
+  sortByRichest() {
+    const currentList = [...this.listPeople];
+    const sortedMoneyByRichest = currentList.sort(this.compare);
+    this.listPeople = [...sortedMoneyByRichest];
+    return this.listPeople;
   }
 }
 
