@@ -20,7 +20,7 @@
             <button class="button px-4 py-4" onclick="doubledMoneyHandler()">
               Double Money
             </button>
-            <button class="button px-4 py-4">Show only Millionaire</button>
+            <button class="button px-4 py-4" onclick="showOnlyMillionairesHandler()">Show only Millionaire</button>
             <button class="button px-4 py-4" onclick="sortByRichestHandler()">
               Sort By Richest
             </button>
@@ -122,6 +122,13 @@
       function sortByRichestHandler() {
         wealthyClass.sortByRichest();
         renderList();
+      }
+
+      function showOnlyMillionairesHandler() {
+        wealthyClass.showOnlyMillionaires();
+        
+        renderList();
+        refreshTotal();
       }
     </script>
   </body>

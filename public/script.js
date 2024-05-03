@@ -71,6 +71,18 @@ class Wealthy {
     this.listPeople = [...sortedMoneyByRichest];
     return this.listPeople;
   }
+
+  showOnlyMillionaires() {
+    const currentList = [...this.listPeople].reduce((temp, iterator) => {
+      if (iterator.money >= 100000) {
+        temp.push(iterator);
+      }
+      return temp;
+    }, []);
+
+    this.listPeople = [...currentList];
+    return this.listPeople;
+  }
 }
 
 //*Note: to defined module in browser.

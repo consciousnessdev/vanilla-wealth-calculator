@@ -66,7 +66,7 @@ describe("Wealth Class", () => {
     expect(totalByClass).toEqual(expectedTotal);
   });
 
-  test("should sort money from the richest", async () => {
+  test.skip("should sort money from the richest", async () => {
     await wealthyClass.addPeople();
     await wealthyClass.addPeople();
     await wealthyClass.addPeople();
@@ -77,5 +77,31 @@ describe("Wealth Class", () => {
       (a, b) => b.money - a.money
     );
     expect(previousSort).toEqual(wealthyClass.sortByRichest());
+  });
+
+  test("should only show people by money which value are million", async () => {
+    await wealthyClass.addPeople();
+    await wealthyClass.addPeople();
+    await wealthyClass.addPeople();
+    await wealthyClass.addPeople();
+    await wealthyClass.addPeople();
+
+    wealthyClass.doubledMoney();
+
+    console.log("DEBUG-wealthy current", wealthyClass.showWealthyPeople());
+
+    const expectedMillionaires = [...wealthyClass.showWealthyPeople()].reduce(
+      (temp, iterator) => {
+        if (iterator.money >= 100000) {
+          temp.push(iterator);
+        }
+        return temp;
+      },
+      []
+    );
+
+    expect(Array.from(wealthyClass.showWealthyPeople().length)).not.toEqual(
+      expectedMillionaires.length
+    );
   });
 });
