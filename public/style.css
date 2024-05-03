@@ -1,3 +1,7 @@
+body {
+  background-color: #f7f7f7;
+}
+
 #app {
   font-family: Arial, Helvetica, sans-serif;
   width: 50%;
@@ -60,4 +64,18 @@
   font-weight: bold;
   font-size: 18pt;
   border-bottom: 2px solid black;
+}
+
+.list-usermoney {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wealth-total {
+  display: none;
+  background-color: #fff;
+  border-bottom: 1px solid black;
+  margin-top: 6px;
+  padding: 8px;
 }

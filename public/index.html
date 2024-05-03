@@ -22,7 +22,9 @@
             </button>
             <button class="button px-4 py-4">Show only Millionaire</button>
             <button class="button px-4 py-4">Sort By Richest</button>
-            <button class="button px-4 py-4">Calculate Entire Wealths</button>
+            <button class="button px-4 py-4" onclick="totalWealthHandler()">
+              Calculate Entire Wealths
+            </button>
           </aside>
           <section class="border-left flex-1 px-4 py-0">
             <div class="header-calculation">
@@ -30,6 +32,7 @@
               <div class="header-item">Wealth</div>
             </div>
             <div class="list-usermoney"></div>
+            <div class="wealth-total"></div>
           </section>
         </div>
       </div>
@@ -37,6 +40,8 @@
     <script src="./script.js"></script>
     <script>
       const wealthyClass = new Wealthy();
+      const totalElement = document.getElementsByClassName("wealth-total");
+
       let listUserMoneyContainer =
         document.getElementsByClassName("list-usermoney")[0];
       listUserMoneyContainer.display = "flex";
@@ -45,13 +50,9 @@
       // re-render list
       function renderList() {
         const list = wealthyClass.showWealthyPeople();
-        // const itemUserMoney = document.createElement("div");
-        // itemUserMoney.className = "item-usermoney";
-        // itemUserMoney.style.display = "flex";
-        // itemUserMoney.style.justifyContent = "space-between";
 
         listUserMoneyContainer.innerHTML = "";
-        console.log("DEBUG-list", list);
+
         for (let index = 0; index < list.length; index++) {
           const itemUserMoney = document.createElement("div");
           itemUserMoney.className = "item-usermoney";
@@ -76,11 +77,44 @@
       async function addHumanHandler() {
         await wealthyClass.addPeople();
         renderList();
+        refreshTotal();
       }
 
       function doubledMoneyHandler() {
         wealthyClass.doubledMoney();
         renderList();
+        refreshTotal();
+      }
+
+      function totalWealthHandler() {
+        if (Array.from(wealthyClass.showWealthyPeople()).length === 0) {
+          return;
+        }
+
+        refreshTotal();
+
+        const totalWealth = wealthyClass.calculateAllWealthy();
+        const wrapperTotalElement = document.createElement("div");
+        const totalLabel = document.createElement("div");
+        const totalVal = document.createElement("div");
+
+        totalLabel.textContent = "Total Wealth";
+        totalVal.style.fontWeight = 800;
+        totalVal.textContent = wealthyClass.formatMoney(totalWealth);
+
+        wrapperTotalElement.style.display = "flex";
+        wrapperTotalElement.style.justifyContent = "space-between";
+        wrapperTotalElement.append(totalLabel);
+        wrapperTotalElement.append(totalVal);
+        totalElement[0].append(wrapperTotalElement);
+        totalElement[0].style.display = "block";
+      }
+
+      function refreshTotal() {
+        if (totalElement[0].children.length) {
+          totalElement[0].innerHTML = "";
+          totalElement[0].style.display = "none";
+        }
       }
     </script>
   </body>
