@@ -45,6 +45,14 @@ class Wealthy {
   showWealthyPeople() {
     return this.listPeople;
   }
+
+  calculateAllWealthy() {
+    let totalWealthy = 0;
+    for (let index = 0; index < this.listPeople.length; index++) {
+      totalWealthy = totalWealthy + this.listPeople[index].money;
+    }
+    return totalWealthy;
+  }
 }
 
 //*Note: to defined module in browser.

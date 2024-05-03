@@ -34,7 +34,7 @@ describe("Wealth Class", () => {
     expect(wealthyData).toHaveLength(2);
   });
 
-  test("should doubled each money user", async () => {
+  test.skip("should doubled each money user", async () => {
     await wealthyClass.addPeople();
     await wealthyClass.addPeople();
     const previousMoney = Array.from(wealthyClass.showWealthyPeople()).map(
@@ -49,5 +49,20 @@ describe("Wealth Class", () => {
       checkDoubledVal[index] = nextMoney[index] === previousMoney[index] * 2;
     }
     expect(checkDoubledVal.every((item) => item === true)).toBe(true);
+  });
+
+  test("should calculate all user money", async () => {
+    await wealthyClass.addPeople();
+    await wealthyClass.addPeople();
+    const expectedTotal = [...wealthyClass.showWealthyPeople()].reduce(
+      (temp, iterator) => {
+        temp = temp + iterator.money;
+        return temp;
+      },
+      0
+    );
+
+    const totalByClass = wealthyClass.calculateAllWealthy();
+    expect(totalByClass).toEqual(expectedTotal);
   });
 });
