@@ -21,7 +21,9 @@
               Double Money
             </button>
             <button class="button px-4 py-4">Show only Millionaire</button>
-            <button class="button px-4 py-4">Sort By Richest</button>
+            <button class="button px-4 py-4" onclick="sortByRichestHandler()">
+              Sort By Richest
+            </button>
             <button class="button px-4 py-4" onclick="totalWealthHandler()">
               Calculate Entire Wealths
             </button>
@@ -115,6 +117,11 @@
           totalElement[0].innerHTML = "";
           totalElement[0].style.display = "none";
         }
+      }
+
+      function sortByRichestHandler() {
+        wealthyClass.sortByRichest();
+        renderList();
       }
     </script>
   </body>
